@@ -648,6 +648,11 @@ class EmacsHeadAT29 < Formula
       system "make", "install"
     end
 
+    # Fix https://github.com/daviderestivo/homebrew-emacs-head/issues/149
+    if build.with? "native-comp"
+      system "ln", "-sf", "#{lib}/native-lisp #{prefix}/Emacs.app/Contents/native-lisp"
+    end
+
     # Follow MacPorts and don't install ctags from GNU Emacs. This
     # allows Vim and GNU Emacs and ctags to play together without
     # violence.
